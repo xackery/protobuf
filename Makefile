@@ -1,4 +1,4 @@
-VERSION=3.8.0
+VERSION=3.11.4
 .PHONY: proto-clean
 proto-clean:
 	@(rm -rf pb/*)
