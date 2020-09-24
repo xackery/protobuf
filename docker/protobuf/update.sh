@@ -1,4 +1,4 @@
-PROTOC=3.11.4
+PROTOC=3.13.0
 apt-get update && apt-get -y upgrade
 apt-get install -y git golang unzip wget
 wget https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC}/protoc-${PROTOC}-linux-x86_64.zip
