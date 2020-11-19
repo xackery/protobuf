@@ -1,20 +1,21 @@
-VERSION=3.13.0
+VERSION=3.14.0
 .PHONY: proto-clean
 proto-clean:
-	@(rm -rf pb/*)
+	@rm -rf pb/*
 .PHONY: proto
 proto: proto-clean
-	@(docker run --rm -v ${PWD}:/src protobuf protoc -I/src/proto --go_out=/src/pb/ event.proto)
+	@docker run --rm -v ${PWD}:/src protobuf protoc -I/src/proto --go_out=/src/pb/ event.proto
 .PHONY: docker-update
 docker-update:
-	@(docker run --rm -v ${PWD}:/src -it ubuntu:18.04 /bin/sh /src/docker/protobuf/update.sh)
+	@docker run --rm -v ${PWD}:/src -it ubuntu:18.04 /bin/sh /src/docker/protobuf/update.sh
 	$(MAKE) docker-build
 .PHONY: docker-build
 docker-build:
-	@(docker build -t protobuf docker/protobuf)
+	@docker build -t protobuf docker/protobuf
+	@docker tag protobuf xackery/protobuf:$(VERSION)
 docker-clean:
-	@(rm -rf docker/protobuf/*)
+	@rm -rf docker/protobuf/*
 .PHONY: docker-push
 docker-push: docker-build 
-	@(docker tag protobuf xackery/protobuf:$(VERSION))
-	@(docker push xackery/protobuf:$(VERSION))
+	@docker tag protobuf xackery/protobuf:$(VERSION)
+	@docker push xackery/protobuf:$(VERSION)

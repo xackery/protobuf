@@ -5,8 +5,9 @@ RUN apt-get -y update && apt-get install -y \
 
 COPY protoc /usr/bin/protoc
 COPY protoc-gen-grpc-gateway /bin/protoc-gen-grpc-gateway
-COPY protoc-gen-swagger /bin/protoc-gen-swagger
 COPY protoc-gen-go /bin/protoc-gen-go
+COPY protoc-gen-go-grpc /bin/protoc-gen-go-grpc
+COPY protoc-gen-openapiv2 /bin/protoc-gen-openapiv2
 
 RUN git clone --branch v1.3.2 https://github.com/golang/protobuf.git /golangproto
 RUN git clone https://github.com/googleapis/googleapis.git /googleapis
